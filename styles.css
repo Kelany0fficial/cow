@@ -518,7 +518,7 @@ footer .social-links .social-icon:hover {
     }
     #banner {
         height: 180px;
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
     }
     .banner-text {
