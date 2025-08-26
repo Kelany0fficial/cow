@@ -113,7 +113,7 @@ nav {
 
 #banner {
     height: 250px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 15px;
@@ -519,7 +519,7 @@ footer .social-links .social-icon:hover {
     }
     #banner {
         height: 180px;
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
         border-radius: 15px;
     }
