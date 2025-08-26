@@ -1,3 +1,5 @@
+// نخزن الإضافات المختارة مؤقتًا
+let selectedAdditions = [];
 document.addEventListener('DOMContentLoaded', () => {
     const page = window.location.pathname.split('/').pop();
     let settings, dairyProducts, cowboyProducts, additions;
@@ -263,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="options">
                     <button onclick="updatePrice(${product.price * 1}, this)">ربع كيلو (${product.price})</button>
                     <button onclick="updatePrice(${product.price * 2}, this)">نصف كيلو (${product.price * 2})</button>
-                    <button onclick="updatePrice(${product.price * 3}, this)">ثلاثة أرباع الكيلو (${product.price * 3})</button>
-                    <button onclick="updatePrice(${product.price * 4}, this)">كيلو إلا ربع (${product.price * 4})</button>
+                    <button onclick="updatePrice(${product.price * 3}, this)">كيلو إلا ربع (${product.price * 3})</button>
+                    <button onclick="updatePrice(${product.price * 4}, this)"> كيلو(${product.price * 4})</button>
                 </div>
             `;
         } else if (type === 'cowboy' && product.additions) {
@@ -300,10 +302,17 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addAddition = (price, btn) => {
-        const currentPrice = parseInt(document.getElementById('detail-price').textContent);
-        document.getElementById('detail-price').textContent = `${currentPrice + price} جنيه`;
-        btn.style.background = '#3B82F6';
-    };
+    const addName = btn.textContent.split('(')[0].trim(); // ناخد اسم الإضافة بدون السعر
+    if (selectedAdditions.find(a => a.name === addName)) {
+        showToast('تم اختيار هذه الإضافة بالفعل');
+        return;
+    }
+    const currentPrice = parseInt(document.getElementById('detail-price').textContent);
+    document.getElementById('detail-price').textContent = `${currentPrice + price} جنيه`;
+    btn.style.background = '#3B82F6';
+    selectedAdditions.push({ name: addName, price });
+};
+
 
     window.goToProductDetail = (id, type) => {
         window.location.href = `product-detail-${type}.html?id=${id}`;
@@ -330,32 +339,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    window.addToCart = (id, type) => {
-        if (page !== 'product-detail-dairy.html' && page !== 'product-detail-cowboy.html') {
-            goToProductDetail(id, type);
-            return;
-        }
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let products = type === 'dairy' ? dairyProducts : cowboyProducts;
-        if (!products) {
-            showToast('خطأ: لم يتم تحميل المنتجات');
-            return;
-        }
-        const product = products.find(p => p.id === id);
-        if (!product || !product.name || !product.price || !product.image) {
-            showToast('خطأ: بيانات المنتج غير صالحة');
-            return;
-        }
-        const price = parseInt(document.getElementById('detail-price')?.textContent || product.price);
-        const existing = cart.find(c => c.id === id && c.price === price && c.type === type);
-        if (existing) {
-            existing.quantity++;
-        } else {
-            cart.push({...product, price, quantity: 1, type});
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast('تم الإضافة للسلة');
-    };
+window.addToCart = (id, type) => {
+    if (page !== 'product-detail-dairy.html' && page !== 'product-detail-cowboy.html') {
+        goToProductDetail(id, type);
+        return;
+    }
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let products = type === 'dairy' ? dairyProducts : cowboyProducts;
+    if (!products) {
+        showToast('خطأ: لم يتم تحميل المنتجات');
+        return;
+    }
+    const product = products.find(p => p.id === id);
+    if (!product || !product.name || !product.price || !product.image) {
+        showToast('خطأ: بيانات المنتج غير صالحة');
+        return;
+    }
+
+    const price = parseInt(document.getElementById('detail-price')?.textContent || product.price);
+    const additionsText = selectedAdditions.map(a => `${a.name} (+${a.price})`).join(', ');
+
+    const existing = cart.find(c => c.id === id && c.price === price && c.type === type && c.additions === additionsText);
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({ ...product, price, quantity: 1, type, additions: additionsText });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast('تم الإضافة للسلة');
+    selectedAdditions = []; // نفرغها عشان المنتج الجاي
+};
+
 
     function loadFavorites() {
         const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -367,14 +381,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.classList.add('fav-card');
             card.style.animationDelay = `${i * 0.1}s`;
-            card.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name} - ${product.price} جنيه</h3>
-                <div class="card-buttons">
-                    <button onclick="removeFromFavorites('${product.id}', '${product.type}')">حذف</button>
-                    <button class="cart-btn" onclick="addToCart('${product.id}', '${product.type}')">إضافة للسلة</button>
-                </div>
-            `;
+           card.innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+    <h3>${product.name} - ${product.price} جنيه</h3>
+    ${product.additions ? `<p class="cart-additions">إضافات: ${product.additions}</p>` : ''}
+    <div class="card-buttons">
+        <button onclick="changeQuantity('${product.id}', -1, ${product.price}, '${product.type}')">-</button>
+        <span>${product.quantity}</span>
+        <button onclick="changeQuantity('${product.id}', 1, ${product.price}, '${product.type}')">+</button>
+        <button onclick="removeFromCart('${product.id}', ${product.price}, '${product.type}')">حذف</button>
+    </div>
+`;
+
             container.appendChild(card);
         });
     }
@@ -452,10 +470,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let message = 'طلب جديد:\n';
         cart.forEach(item => {
-            if (item && item.name && item.price) {
-                message += `عدد (${item.quantity}) ${item.name} - ${item.price * item.quantity} جنيه\n`;
-            }
-        });
+    if (item && item.name && item.price) {
+        message += `عدد (${item.quantity}) ${item.name} - ${item.price * item.quantity} جنيه\n`;
+        if (item.additions) message += `إضافات: ${item.additions}\n`;
+    }
+});
+
         message += `الإجمالي: ${document.getElementById('total-price').textContent} جنيه\n`;
         message += `الاسم: ${name}\nرقم: ${phone}\nعنوان: ${address}\nملاحظات: ${notes}\nدفع: ${payment}`;
 
