@@ -36,7 +36,7 @@ header {
 
 nav {
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
 }
 
 .hamburger {
@@ -113,14 +113,13 @@ nav {
 
 #banner {
     height: 250px;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
     background-repeat: no-repeat;
-    border-radius: 0 0 15px 15px;
+    background-position: center;
+    border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     position: relative;
     animation: fadeIn 1s ease-in-out;
-    margin-top: 60px; /* ⬅️ مسافة تساوي ارتفاع النافبار */
 }
 
 .banner-text {
@@ -520,9 +519,9 @@ footer .social-links .social-icon:hover {
     }
     #banner {
         height: 180px;
-        background-size: cover;
+        background-size: contain;
         background-repeat: no-repeat;
-        margin-top: 50px; /* ⬅️ قللها شوية للموبايل */
+        border-radius: 15px;
     }
     .banner-text {
         font-size: 1.2em;
