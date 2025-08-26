@@ -504,7 +504,7 @@ footer .social-links .social-icon:hover {
 
 @media (max-width: 768px) {
     nav {
-        margin-bottom: 6px;
+        margin-bottom: 10px;
         height:55px;
     }
     .nav-links {
@@ -526,6 +526,7 @@ footer .social-links .social-icon:hover {
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 15px;
+        margin-height: 8px;
     }
     .banner-text {
         font-size: 1.2em;
