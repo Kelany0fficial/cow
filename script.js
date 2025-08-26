@@ -468,7 +468,7 @@ function submitOrder() {
     const notes = document.getElementById('notes').value;
     const payment = document.getElementById('payment').value;
 
-    let message = "طلب جديد:\n\n";
+    let message = "طلب جديد:\n";
 
     cart.forEach((item, index) => {
         if (item && item.name && item.price) {
@@ -487,11 +487,11 @@ function submitOrder() {
                 }
             }
 
-            message += "\n-------------------------\n\n";
+            message += "\n-------------------------\n";
         }
     });
 
-    message += `الإجمالي الكلي: ${document.getElementById('total-price').textContent} جنيه\n\n`;
+    message += `الإجمالي الكلي: ${document.getElementById('total-price').textContent} جنيه\n`;
     message += `الاسم: ${name}\n`;
     message += `رقم: ${phone}\n`;
     message += `عنوان: ${address}\n`;
