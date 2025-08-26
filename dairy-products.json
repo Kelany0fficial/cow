@@ -1,0 +1,48 @@
+[
+    {
+        "id": "d1",
+        "name": "جبنة بيضاء",
+        "category": "ألبان",
+        "price": 20,
+        "oldPrice": 25,
+        "description": "جبنة طازجة ونقية من الألبان الطبيعية",
+        "image": "https://via.placeholder.com/200?text=Cheese",
+        "options": true,
+        "type": "dairy",
+        "isOffer": true
+    },
+    {
+        "id": "d2",
+        "name": "لبن فريش",
+        "category": "فريش",
+        "price": 10,
+        "description": "لبن طازج من المزرعة مباشرة",
+        "image": "https://via.placeholder.com/200?text=Milk",
+        "options": false,
+        "type": "dairy",
+        "isOffer": false
+    },
+    {
+        "id": "d3",
+        "name": "بيض عضوي",
+        "category": "بيض",
+        "price": 5,
+        "description": "بيض طازج من مزارع عضوية",
+        "image": "https://via.placeholder.com/200?text=Eggs",
+        "options": false,
+        "type": "dairy",
+        "isOffer": true
+    },
+    {
+        "id": "d4",
+        "name": "لانشون لحم",
+        "category": "لانشون",
+        "price": 30,
+        "oldPrice": 35,
+        "description": "لانشون لحم عالي الجودة",
+        "image": "https://via.placeholder.com/200?text=Luncheon",
+        "options": true,
+        "type": "dairy",
+        "isOffer": true
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "id": "c1",
+        "name": "وافل",
+        "category": "وافل",
+        "price": 40,
+        "description": "وافل مقرمش مع نكهة لا تقاوم",
+        "image": "https://via.placeholder.com/200?text=Waffle",
+        "additions": true,
+        "additionIds": ["a1", "a2", "a3", "a4"],
+        "type": "cowboy",
+        "isOffer": true
+    },
+    {
+        "id": "c2",
+        "name": "دونتس",
+        "category": "دونتس",
+        "price": 15,
+        "description": "دونتس طازجة مغطاة بالسكر أو الشوكولاتة",
+        "image": "https://via.placeholder.com/200?text=Donuts",
+        "additions": false,
+        "additionIds": [],
+        "type": "cowboy",
+        "isOffer": false
+    },
+    {
+        "id": "c3",
+        "name": "أرز باللبن",
+        "category": "الأرز باللبن",
+        "price": 20,
+        "description": "أرز باللبن كريمي مع لمسة القرفة",
+        "image": "https://via.placeholder.com/200?text=RicePudding",
+        "additions": true,
+        "additionIds": ["a5", "a4", "a6"],
+        "type": "cowboy",
+        "isOffer": true
+    },
+    {
+        "id": "c4",
+        "name": "آيس كريم",
+        "category": "الآيس كريم",
+        "price": 25,
+        "description": "آيس كريم بنكهات متنوعة ومنعشة",
+        "image": "https://via.placeholder.com/200?text=IceCream",
+        "additions": true,
+        "additionIds": ["a7", "a8"],
+        "type": "cowboy",
+        "isOffer": true
+    },
+    {
+        "id": "c5",
+        "name": "تشيز كيك",
+        "category": "تشيز كيك",
+        "price": 35,
+        "description": "تشيز كيك كريمي بنكهة الفانيليا",
+        "image": "https://via.placeholder.com/200?text=Cheesecake",
+        "additions": true,
+        "additionIds": ["a9", "a2"],
+        "type": "cowboy",
+        "isOffer": false
+    }
+]
