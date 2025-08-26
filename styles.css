@@ -36,7 +36,6 @@ header {
 
 nav {
     position: relative;
-    margin-bottom: 8px;
 }
 
 .hamburger {
@@ -507,11 +506,6 @@ footer .social-links .social-icon:hover {
         font-size: 0.85em;
         padding: 5px 8px;
     }
-    .cart-btn, .fav-btn {
-        min-width: 80px;
-        font-size: 0.8em;
-        padding: 6px 8px;
-    }
     #banner {
         height: 180px;
     }
@@ -532,6 +526,10 @@ footer .social-links .social-icon:hover {
         height: 180px;
     }
     .options button, .additions button {
+        min-width: 90px;
+        font-size: 0.85em;
+    }
+    .cart-btn, .fav-btn {
         min-width: 90px;
         font-size: 0.85em;
     }
