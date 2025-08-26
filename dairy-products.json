@@ -6,7 +6,7 @@
         "price": 20,
         "oldPrice": 25,
         "description": "جبنة طازجة ونقية من الألبان الطبيعية",
-        "image": "https://via.placeholder.com/200?text=Cheese",
+        "image": "https://i.postimg.cc/9MR1Z1Wq/IMG-20250826-WA0047.jpg",
         "options": true,
         "type": "dairy",
         "isOffer": true
@@ -17,7 +17,7 @@
         "category": "فريش",
         "price": 10,
         "description": "لبن طازج من المزرعة مباشرة",
-        "image": "https://via.placeholder.com/200?text=Milk",
+        "image": "https://i.postimg.cc/76F9V76t/IMG-20250826-WA0048.jpg",
         "options": false,
         "type": "dairy",
         "isOffer": false
@@ -28,7 +28,7 @@
         "category": "بيض",
         "price": 5,
         "description": "بيض طازج من مزارع عضوية",
-        "image": "https://via.placeholder.com/200?text=Eggs",
+        "image": "https://i.postimg.cc/9MR1Z1Wq/IMG-20250826-WA0047.jpg",
         "options": false,
         "type": "dairy",
         "isOffer": true
@@ -40,7 +40,7 @@
         "price": 30,
         "oldPrice": 35,
         "description": "لانشون لحم عالي الجودة",
-        "image": "https://via.placeholder.com/200?text=Luncheon",
+        "image": "https://i.postimg.cc/76F9V76t/IMG-20250826-WA0048.jpg",
         "options": true,
         "type": "dairy",
         "isOffer": true
