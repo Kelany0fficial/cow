@@ -456,35 +456,54 @@ window.addToCart = (id, type) => {
         showToast('تم الحذف من السلة');
     };
 
-    function submitOrder() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) {
-            showToast('السلة فارغة');
-            return;
+function submitOrder() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        showToast('السلة فارغة');
+        return;
+    }
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const notes = document.getElementById('notes').value;
+    const payment = document.getElementById('payment').value;
+
+    let message = "طلب جديد:\n\n";
+
+    cart.forEach((item, index) => {
+        if (item && item.name && item.price) {
+            message += `${index + 1}- ${item.name}\n`;
+            message += `الكمية: ${item.quantity}\n`;
+            message += `الإجمالي: ${item.price * item.quantity} جنيه\n`;
+
+            if (item.additions) {
+                message += "الإضافات:\n";
+                if (typeof item.additions === "string") {
+                    message += `- ${item.additions}\n`;
+                } else {
+                    item.additions.forEach(add => {
+                        message += `- ${add.name} (+${add.price} جنيه)\n`;
+                    });
+                }
+            }
+
+            message += "\n-------------------------\n\n";
         }
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const address = document.getElementById('address').value;
-        const notes = document.getElementById('notes').value;
-        const payment = document.getElementById('payment').value;
+    });
 
-        let message = 'طلب جديد:\n';
-        cart.forEach(item => {
-    if (item && item.name && item.price) {
-        message += `عدد (${item.quantity}) ${item.name} - ${item.price * item.quantity} جنيه\n`;
-        if (item.additions) message += `إضافات: ${item.additions}\n`;
-    }
-});
+    message += `الإجمالي الكلي: ${document.getElementById('total-price').textContent} جنيه\n\n`;
+    message += `الاسم: ${name}\n`;
+    message += `رقم: ${phone}\n`;
+    message += `عنوان: ${address}\n`;
+    message += `ملاحظات: ${notes || "لا يوجد"}\n`;
+    message += `طريقة الدفع: ${payment}`;
 
-        message += `الإجمالي: ${document.getElementById('total-price').textContent} جنيه\n`;
-        message += `الاسم: ${name}\nرقم: ${phone}\nعنوان: ${address}\nملاحظات: ${notes}\nدفع: ${payment}`;
+    const whatsappUrl = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    localStorage.removeItem('cart');
+    loadCart();
+    showToast('تم إرسال الطلب بنجاح');
+}
 
-        const whatsappUrl = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        localStorage.removeItem('cart');
-        loadCart();
-        showToast('تم إرسال الطلب بنجاح');
-    }
-
-    init();
+init();
 });
