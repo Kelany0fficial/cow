@@ -504,7 +504,7 @@ footer .social-links .social-icon:hover {
 
 @media (max-width: 768px) {
     nav {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
     .nav-links {
         flex-wrap: wrap;
