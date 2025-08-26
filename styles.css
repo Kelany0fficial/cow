@@ -501,7 +501,6 @@ footer .social-links .social-icon:hover {
     font-weight: 600;
     animation: fadeInOut 1s ease forwards;
 }
-
 @media (max-width: 768px) {
     nav {
         margin-bottom: 10px;
@@ -522,11 +521,11 @@ footer .social-links .social-icon:hover {
         padding: 5px 6px;
     }
     #banner {
-        height: 180px;
+        height: 200px;
         background-size: cover;
         background-repeat: no-repeat;
-        border-radius: 15px;
-        margin-height: 15px;
+        border-radius: 12px;
+        margin: 12px;
     }
     .banner-text {
         font-size: 1.2em;
